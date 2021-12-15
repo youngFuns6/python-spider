@@ -24,7 +24,7 @@ def main():
 
 
 findLink = re.compile(r'<a href="(.*?)">')
-findImgSrc = re.compile(r'<img src="(.*?)">', re.S)
+findImgSrc = re.compile(r'<img.*src="(.*?)".*>', re.S)
 findTitle = re.compile(r'<span class="title">(.*)</span>')
 findRating = re.compile(r'span class="rating_num" property="v:average">(.*)</span>')
 findJudge = re.compile(r'<span>(\d*)人评价</span>')
@@ -52,7 +52,9 @@ def getData(baseurl):
             data.append(link)
 
             imgSrc = re.findall(findImgSrc, item)[0]
+            print(re.findall(findImgSrc, item))
             data.append(imgSrc)
+
             titles = re.findall(findTitle, item)
             if len(titles) == 2:
                 ctitle = titles[0]
